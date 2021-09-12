@@ -1,0 +1,50 @@
+class LinkedStack:
+
+    class _Node:
+        __slots__ = '_element', '_next'
+        def __init__(self, element, next):
+            self._element = element
+            self._next = next
+    
+    def __init__(self):
+        self._head = None
+        self._size = 0
+
+    def __len__(self):
+        return self._size
+    
+    def is_empty(self):
+        return self._size == 0
+    
+    def push(self, e):
+        self._head = self._Node(e, self._head)
+        self._size += 1
+    
+    def top(self):
+        if self.is_empty():
+            raise Exception('Empty Stack')
+        else:
+            return self._head._element
+
+    def pop(self):
+        if self.is_empty():
+            raise Exception('Empty Stack')
+        else:
+            answer = self._head._element
+            self._head = self._head._next
+            self._size -= 1
+            return answer
+    
+
+if __name__ == '__main__':
+    stack = LinkedStack()
+    for i in range(0, 10, 2):
+        stack.push(i)
+        print(f'top of the stack: {stack.top()}')
+        print(f'length of the stack: {len(stack)}')
+    
+    for _ in range(4):
+        stack.pop()
+        print(f'top of the stack: {stack.top()}')
+        print(f'length of the stack: {len(stack)}')
+    
